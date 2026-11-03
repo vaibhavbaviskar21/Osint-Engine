@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OSINT Engine</title>
+  <meta name="description" content="Open-source intelligence workbench: domain, IP, email, username, phone and image investigation in your browser." />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='13' cy='13' r='9' fill='none' stroke='%233ddc97' stroke-width='3'/%3E%3Cpath d='M20 20l8 8' stroke='%233ddc97' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button id="navToggle" class="icon-btn" aria-label="Menu">☰</button>
+    <a href="#/" class="brand"><span class="logo">◎</span> OSINT <span class="accent">Engine</span></a>
+  </header>
+  <aside class="sidebar">
+    <a href="#/" class="brand"><span class="logo">◎</span> OSINT <span class="accent">Engine</span></a>
+    <nav class="nav">
+      <a href="#/">🏠 Dashboard</a>
+      <div class="nav-h">Investigate</div>
+      <a href="#/domain">🌐 Domain</a>
+      <a href="#/ip">📍 IP address</a>
+      <a href="#/email">✉️ Email</a>
+      <a href="#/username">👤 Username</a>
+      <a href="#/phone">☎️ Phone</a>
+      <div class="nav-h">Analyse</div>
+      <a href="#/image">🖼️ Image forensics</a>
+      <a href="#/headers">📨 Email headers</a>
+      <a href="#/toolkit">🧰 Crypto & decode</a>
+      <a href="#/dorks">🔎 Dork builder</a>
+      <div class="nav-h">Resources</div>
+      <a href="#/tools">📚 Tool directory</a>
+      <a href="#/case">🗂️ Case notebook <span class="badge" id="caseCount" hidden>0</span></a>
+      <a href="#/about">⚖️ About & ethics</a>
+    </nav>
+    <div class="sidebar-f">
+      <button id="themeToggle" class="btn sm ghost" type="button">◐ Theme</button>
+      <span class="muted small">Runs in your browser</span>
+    </div>
+  </aside>
+  <main id="view" class="view"></main>
+  <noscript><p style="padding:2rem">OSINT Engine requires JavaScript.</p></noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
