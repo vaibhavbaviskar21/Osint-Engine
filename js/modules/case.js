@@ -1,6 +1,6 @@
 import { loadCase, saveCase, removeEntity, updateEntity, addEntity, caseToMarkdown, caseToCsv } from '../case.js';
 import { detectType, toHostname, TYPE_LABELS } from '../lib/detect.js';
-import { esc, card, copyBtn, toast } from '../ui.js';
+import { esc, card, copyBtn, toast, pageHeader } from '../ui.js';
 
 const ROUTES = { domain: 'domain', ip: 'ip', email: 'email', username: 'username', phone: 'phone', url: 'domain' };
 
@@ -19,8 +19,7 @@ export function render(root) {
     const c = loadCase();
     const types = [...new Set(c.entities.map((e) => e.type))];
     root.innerHTML = `
-      <div class="page-h"><h1>Case Notebook</h1>
-        <p class="muted">Collect indicators as you pivot. Stored only in this browser — export regularly.</p></div>
+      ${pageHeader(`Case Notebook`, `Collect indicators as you pivot. Stored only in this browser — export regularly.`, 'folder')}
       ${card('Case', `<input class="input big" id="cname" value="${esc(c.name)}" />
         <p class="muted small">Created ${esc(c.created)} · ${c.entities.length} entities</p>
         <textarea class="input" id="cnotes" rows="4" placeholder="Investigation notes, hypotheses, timeline…">${esc(c.notes)}</textarea>
@@ -44,7 +43,7 @@ export function render(root) {
                  <td><button class="icon-btn del" title="Remove">✕</button></td></tr>`,
              )
              .join('')}</tbody></table>`
-        : '<p class="muted">No entities yet. Use the “＋ Case” buttons throughout the app, or add one above.</p>')}
+        : '<p class="muted">No entities yet. Use the “+ Case” buttons throughout the app, or add one above.</p>')}
     `;
     const $ = (s) => root.querySelector(s);
     $('#cname').addEventListener('change', () => saveCase({ ...loadCase(), name: $('#cname').value.trim() || 'Untitled investigation' }));

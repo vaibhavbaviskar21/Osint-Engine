@@ -84,6 +84,7 @@ function run(root, email) {
 export function render(root, params) {
   const q = params.get('q') || '';
   root.innerHTML = pageForm({
+    ic: 'mail',
     title: 'Email Intelligence',
     intro: 'Validate deliverability, inspect mail security, find Gravatar, and pivot to breach & leak sources.',
     placeholder: 'name@example.com',

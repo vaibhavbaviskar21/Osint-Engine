@@ -56,7 +56,8 @@ export function render(root, params) {
   const q = params.get('q') || '';
   root.innerHTML =
     pageForm({
-      title: 'Username Search',
+      ic: 'user',
+    title: 'Username Search',
       intro: `Generate profile links for a handle across ${SITES.length} platforms, grouped by category.`,
       placeholder: 'johndoe',
       value: q,

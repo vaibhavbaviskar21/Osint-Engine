@@ -1,14 +1,16 @@
-import { card } from '../ui.js';
+import { card, pageHeader } from '../ui.js';
 
 export function render(root) {
   root.innerHTML = `
-    <div class="page-h"><h1>About & Ethics</h1>
-      <p class="muted">OSINT Engine is an open-source intelligence workbench for researchers, journalists, defenders and investigators.</p></div>
+    ${pageHeader(`About & Ethics`, `OSINT Engine is an open-source intelligence workbench for researchers, journalists, defenders and investigators.`, 'info')}
     <div class="grid two">
       ${card('How it works', `<ul>
         <li><strong>No backend, no accounts, no tracking.</strong> It is a static site; every query runs from your browser.</li>
         <li><strong>Local-only tools:</strong> image forensics, email header analysis, hashing, decoding, indicator extraction and the case notebook never send data anywhere.</li>
-        <li><strong>Live lookups</strong> call free public APIs directly: Cloudflare / Google DNS-over-HTTPS, rdap.org, ipwho.is, crt.sh / Cert Spotter, the Internet Archive and Gravatar.</li>
+        <li><strong>Live lookups</strong> call free public APIs directly, each with a backup: DNS-over-HTTPS (Cloudflare → Google), RDAP (rdap.org → Verisign / ARIN), geolocation (ipwho.is → ipapi.co → ipinfo.io), certificates (crt.sh → Cert Spotter), the Internet Archive and Gravatar. See <a href="#/status">System status</a>.</li>
+        <li><strong>Social profile collector</strong> uses platforms’ official public APIs (GitHub, GitLab, Bluesky, Mastodon, Reddit, Hacker News, DEV, Lichess, Chess.com, Keybase). It never logs in or scrapes private pages.</li>
+        <li><strong>Remove My Data</strong> stores your details and progress only in this browser. Letters are generated locally and sent from your own email.</li>
+        <li><strong>Fast & offline-capable:</strong> pages load on demand, responses are cached per session, failed requests retry automatically, and the app can be installed and used offline.</li>
         <li><strong>Pivot links</strong> open third-party services in a new tab — those services will see what you search.</li>
       </ul>`)}
       ${card('Responsible use', `<ul>

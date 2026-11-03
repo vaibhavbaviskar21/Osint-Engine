@@ -2,7 +2,7 @@ import { allHashes, identifyHash } from '../lib/hash.js';
 import { hashKind } from '../lib/detect.js';
 import { pivots } from '../lib/pivots.js';
 import * as E from '../lib/encoding.js';
-import { esc, card, kv, errorBox, pivotList, caseBtn } from '../ui.js';
+import { esc, card, kv, errorBox, pivotList, caseBtn, pageHeader } from '../ui.js';
 
 const TRANSFORMS = [
   ['b64e', 'Base64 encode', E.b64Encode],
@@ -25,8 +25,7 @@ const TRANSFORMS = [
 
 export function render(root) {
   root.innerHTML = `
-    <div class="page-h"><h1>Crypto & Decode Toolkit</h1>
-      <p class="muted">Everyday analyst utilities. Everything runs locally in your browser.</p></div>
+    ${pageHeader(`Crypto & Decode Toolkit`, `Everyday analyst utilities. Everything runs locally in your browser.`, 'key')}
     <div class="grid two">
       ${card('Hash generator', `<textarea id="hin" class="input" rows="4" placeholder="Text to hash…"></textarea><div id="hout"></div>`)}
       ${card('Hash identifier', `<input id="hid" class="input" placeholder="Paste a hash: 5f4dcc3b5aa765d61d8327deb882cf99" /><div id="hidout"></div>`)}

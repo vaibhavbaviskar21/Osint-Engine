@@ -36,6 +36,7 @@ function run(root, raw) {
 export function render(root, params) {
   const q = params.get('q') || '';
   root.innerHTML = pageForm({
+    ic: 'phone',
     title: 'Phone Intelligence',
     intro: 'Identify the country from the calling code, normalise to E.164 and search every written variant.',
     placeholder: '+1 415 555 0123',

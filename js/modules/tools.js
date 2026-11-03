@@ -1,5 +1,5 @@
 import { TOOLS, CATEGORIES } from '../data/tools.js';
-import { esc, safeUrl } from '../ui.js';
+import { esc, safeUrl, pageHeader } from '../ui.js';
 
 const FAV_KEY = 'osint-engine.favs.v1';
 
@@ -23,8 +23,7 @@ export function render(root, params) {
   const favs = loadFavs();
   let cat = params.get('cat') || 'All';
   root.innerHTML = `
-    <div class="page-h"><h1>Tool Directory</h1>
-      <p class="muted">${TOOLS.length} curated resources across ${CATEGORIES.length} categories. ★ to pin favourites (saved in this browser).</p></div>
+    ${pageHeader(`Tool Directory`, `${TOOLS.length} curated resources across ${CATEGORIES.length} categories. ★ to pin favourites (saved in this browser).`, 'book')}
     <div class="search-row"><input id="tq" class="input" placeholder="Search tools… (e.g. subdomain, satellite, breach)" value="${esc(params.get('q') || '')}" /></div>
     <div class="chips" id="cats">${['All', '★ Favourites', ...CATEGORIES].map((c) => `<button class="chip" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>
     <p class="muted small" id="count"></p>

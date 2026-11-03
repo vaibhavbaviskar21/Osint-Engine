@@ -1,5 +1,5 @@
 import { analyzeHeaders } from '../lib/emailHeaders.js';
-import { esc, card, kv, empty, caseBtn, copyBtn } from '../ui.js';
+import { esc, card, kv, empty, caseBtn, copyBtn, pageHeader } from '../ui.js';
 
 const SAMPLE = `Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
         by mx.example.org (Postfix) with ESMTPS id 4A1B2C3D4E
@@ -68,8 +68,7 @@ function renderResult(r) {
 
 export function render(root) {
   root.innerHTML = `
-    <div class="page-h"><h1>Email Header Analyzer</h1>
-      <p class="muted">Trace the delivery path, check SPF / DKIM / DMARC and surface phishing red flags. Parsed locally in your browser.</p></div>
+    ${pageHeader(`Email Header Analyzer`, `Trace the delivery path, check SPF / DKIM / DMARC and surface phishing red flags. Parsed locally in your browser.`, 'inbox')}
     <textarea id="raw" class="input" rows="10" placeholder="Paste full raw email headers here…"></textarea>
     <div class="actions"><button class="btn" id="go">Analyse</button><button class="btn ghost" id="sample">Load phishing sample</button></div>
     <div id="results" class="results"></div>`;
