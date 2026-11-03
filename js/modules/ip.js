@@ -38,6 +38,7 @@ function run(root, ip) {
       ['ISP', g.isp],
       ['Network domain', g.domain],
       ['Type', g.type],
+      ['Data source', g.source],
     ]) + '<p class="muted small">IP geolocation is approximate — often the ISP’s point of presence, not the user.</p>';
   });
   section($('#map'), async () => {
@@ -58,6 +59,7 @@ function run(root, ip) {
       ['Abuse contact', r.abuseEmail, { copy: true }],
       ['Registered', fmtDate(r.created)],
       ['Last changed', fmtDate(r.updated)],
+      ['Data source', r.source],
     ]);
   });
   section($('#ptr'), async () => {
@@ -75,6 +77,7 @@ function run(root, ip) {
 export function render(root, params) {
   const q = params.get('q') || '';
   root.innerHTML = pageForm({
+    ic: 'pin',
     title: 'IP Intelligence',
     intro: 'Geolocation, ASN, network ownership via RDAP, reverse DNS and one-click reputation pivots.',
     placeholder: '8.8.8.8 or 2606:4700::1111',

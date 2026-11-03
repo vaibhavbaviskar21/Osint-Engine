@@ -72,6 +72,7 @@ export async function run(root, domain) {
       ['Nameservers', r.nameservers],
       ['DNSSEC', r.secureDNS === null ? null : r.secureDNS ? 'signed' : 'unsigned'],
       ['Abuse contact', r.abuseEmail, { copy: true }],
+      ['Data source', r.source],
     ]);
   });
 
@@ -128,6 +129,7 @@ export async function run(root, domain) {
 export function render(root, params) {
   const q = params.get('q') || '';
   root.innerHTML = pageForm({
+    ic: 'globe',
     title: 'Domain Intelligence',
     intro: 'Live DNS (DNS-over-HTTPS), RDAP registration data, certificate-transparency subdomains, mail security and archive history.',
     placeholder: 'example.com',

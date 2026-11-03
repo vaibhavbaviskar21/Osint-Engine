@@ -1,5 +1,6 @@
 // Shared UI helpers: escaping, cards, key/value tables, copy & case buttons.
 import { addEntity } from './case.js';
+import { icon } from './icons.js';
 
 export function esc(v) {
   return String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -25,8 +26,11 @@ export function card(title, body, opts = {}) {
   </section>`;
 }
 
-export const loading = (msg = 'Querying…') => `<div class="loading"><span class="spinner"></span>${esc(msg)}</div>`;
-export const errorBox = (msg) => `<div class="alert bad">⚠ ${esc(msg)}</div>`;
+export const loading = (msg = '') =>
+  `<div class="skel" aria-busy="true"><i></i><i></i><i></i><i></i>${msg ? `<span class="loading"><span class="spinner"></span>${esc(msg)}</span>` : ''}</div>`;
+export const errorBox = (msg) => `<div class="alert bad">${icon('alert')}<span>${esc(msg)}</span></div>`;
+export const infoBox = (html) => `<div class="alert info">${icon('info')}<div>${html}</div></div>`;
+export const source = (name) => (name ? `<span class="source">via ${esc(name)}</span>` : '');
 export const empty = (msg) => `<p class="muted">${esc(msg)}</p>`;
 
 /** Render [[key, value, {raw:boolean, copy:boolean}]] rows; null/empty values are skipped. */
@@ -43,15 +47,15 @@ export function kv(rows) {
 }
 
 export function copyBtn(text) {
-  return `<button class="icon-btn" data-copy="${esc(text)}" title="Copy">⧉</button>`;
+  return `<button class="icon-btn" data-copy="${esc(text)}" title="Copy" aria-label="Copy">${icon('copy')}</button>`;
 }
 
 export function caseBtn(type, value, note = '') {
-  return `<button class="btn sm ghost" data-case-type="${esc(type)}" data-case-value="${esc(value)}" data-case-note="${esc(note)}" title="Add to case notebook">＋ Case</button>`;
+  return `<button class="btn sm ghost" data-case-type="${esc(type)}" data-case-value="${esc(value)}" data-case-note="${esc(note)}" title="Add to case notebook">${icon('plus')} Case</button>`;
 }
 
 export function pivotList(items) {
-  return `<div class="pivots">${items.map((p) => `<a class="chip" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">${esc(p.name)} ↗</a>`).join('')}</div>`;
+  return `<div class="pivots">${items.map((p) => `<a class="chip" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">${esc(p.name)} ${icon('external')}</a>`).join('')}</div>`;
 }
 
 export function toast(msg) {
@@ -99,11 +103,15 @@ export function installGlobalHandlers() {
 }
 
 /** Standard page scaffold with a title, intro and a single-input form. */
-export function pageForm({ title, intro, placeholder, value = '', button = 'Investigate', extra = '' }) {
-  return `<div class="page-h"><h1>${esc(title)}</h1><p class="muted">${intro}</p></div>
+export function pageHeader(title, intro, ic = 'search') {
+  return `<div class="page-h"><div class="page-ic">${icon(ic)}</div><div><h1>${esc(title)}</h1><p>${intro}</p></div></div>`;
+}
+
+export function pageForm({ title, intro, placeholder, value = '', button = 'Investigate', extra = '', ic = 'search' }) {
+  return `${pageHeader(title, intro, ic)}
     <form class="search-row" id="pageForm" autocomplete="off">
       <input id="q" class="input" placeholder="${esc(placeholder)}" value="${esc(value)}" spellcheck="false" />
-      <button class="btn" type="submit">${esc(button)}</button>
+      <button class="btn" type="submit">${icon('search')} ${esc(button)}</button>
     </form>${extra}
     <div id="results" class="results"></div>`;
 }

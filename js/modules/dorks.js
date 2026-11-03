@@ -1,5 +1,5 @@
 import { buildDork, ENGINES, engineUrl, DORK_TEMPLATES, fillTemplate } from '../lib/dork.js';
-import { esc, card, copyBtn, safeUrl } from '../ui.js';
+import { esc, card, copyBtn, safeUrl, pageHeader } from '../ui.js';
 
 const FIELDS = [
   ['keywords', 'Keywords', 'annual report'],
@@ -20,8 +20,7 @@ const engineButtons = (q) =>
 
 export function render(root, params) {
   root.innerHTML = `
-    <div class="page-h"><h1>Dork Builder</h1>
-      <p class="muted">Compose advanced search-engine queries, or run ready-made recon templates against a target. Use only on targets you’re authorised to research.</p></div>
+    ${pageHeader(`Dork Builder`, `Compose advanced search-engine queries, or run ready-made recon templates against a target. Use only on targets you’re authorised to research.`, 'search')}
     ${card('Query builder', `<div class="form-grid">${FIELDS.map(([k, l, p]) => `<label><span>${esc(l)}</span><input class="input" data-f="${k}" placeholder="${esc(p)}" /></label>`).join('')}</div>
       <p class="muted small">Comma-separate values to OR them together.</p>
       <div class="query-box"><code id="query" class="mono">…</code><span id="qcopy"></span></div>

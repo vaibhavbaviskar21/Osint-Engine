@@ -1,7 +1,8 @@
+import { icon } from '../icons.js';
 import { parseExif, sniffFileType } from '../lib/exif.js';
 import { allHashes } from '../lib/hash.js';
 import { isUrl } from '../lib/detect.js';
-import { esc, card, kv, errorBox, empty, caseBtn, mapEmbed, link } from '../ui.js';
+import { esc, card, kv, errorBox, empty, caseBtn, mapEmbed, link, pageHeader } from '../ui.js';
 
 const SENSITIVE = ['Make', 'Model', 'BodySerialNumber', 'LensSerialNumber', 'CameraOwnerName', 'Artist', 'Software', 'HostComputer', 'DateTimeOriginal'];
 
@@ -95,12 +96,10 @@ async function analyseFile(root, file) {
 
 export function render(root) {
   root.innerHTML = `
-    <div class="page-h"><h1>Image Forensics</h1>
-      <p class="muted">Extract EXIF metadata and GPS location, fingerprint the file, and launch reverse image searches.
-      <strong>Files are processed entirely in your browser and never uploaded.</strong></p></div>
+    ${pageHeader(`Image Forensics`, `Extract EXIF metadata and GPS location, fingerprint the file, and launch reverse image searches. <strong>Files are processed entirely in your browser and never uploaded.</strong>`, 'image')}
     <label class="dropzone" id="drop">
       <input type="file" id="file" accept="image/*,.jpg,.jpeg,.png,.heic,.tif,.tiff,.webp" hidden />
-      <span class="tile-i">🖼️</span>
+      <span class="tile-i">${icon('image')}</span>
       <strong>Drop an image here, or click to choose</strong>
       <span class="muted">JPEG files carry the richest EXIF data · you can also paste from clipboard</span>
     </label>
